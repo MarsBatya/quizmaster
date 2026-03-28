@@ -128,6 +128,7 @@ app.round-i-of-n=Round {0} of {1}
 app.question-i-of-n=Question {0} of {1}
 app.questions=questions
 app.question=Question
+app.answer=Answer
 app.first-right-answer-gains-n-points=First right answer gains {0} points
 app.first-right-answer-gains-1-point=First right answer gains 1 point
 app.others-gain-1-point=other right answers gain 1 point

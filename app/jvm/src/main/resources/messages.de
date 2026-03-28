@@ -35,6 +35,7 @@ app.round-i-of-n=Runde {0} von {1}
 app.question-i-of-n=Frage {0} von {1}
 app.questions=Fragen
 app.question=Frage
+app.answer=Antwort
 app.first-right-answer-gains-n-points=Die erste richtige Antwort erhält {0} Punkte
 app.first-right-answer-gains-1-point=Die erste richtige Antwort erhält 1 Punkt
 app.others-gain-1-point=Andere richtige Antworten erhalten 1 Punkt

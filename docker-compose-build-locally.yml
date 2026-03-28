@@ -1,12 +1,13 @@
-version: "3.7"
+
 services:
   app:
-    build:
+    build: # this is only when i need to rebuild it. comment out when not needed
       context: .
       dockerfile: Dockerfile.build_and_run
+    image: quizmaster:localv2
     stdin_open: true
     tty: true
-    ports: ["9000:9000"]
+    ports: ["8080:9000"] # outer port : inner port (can't be changed)
     volumes:
       - ./conf/quiz:/app/conf/quiz
       - ./conf/application.conf:/app/conf/application.conf

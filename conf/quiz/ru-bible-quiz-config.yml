@@ -1,0 +1,88 @@
+title: Библейская викторина
+author: Ваше имя
+instructionsOnFirstSlide: Пожалуйста, не ищите ответы в интернете
+masterSecret: quiz
+language: ru
+
+usageStatistics:
+  sendAnonymousUsageDataAtEndOfQuiz: true
+
+defaults:
+  maxTimeSeconds: 60
+  pointsToGain: 1
+
+rounds:
+  - name: Ветхий Завет
+    questions:
+      - question: Как звали первого человека, созданного Богом?
+        answer: Адам
+
+      - question: Кто построил ковчег?
+        answer: Ной
+
+      - question: Кого Бог повелел Аврааму принести в жертву, а затем заменил его овном?
+        answer: Исаак
+
+      - question: Сколько заповедей получил Моисей на горе Синай?
+        choices: [5, 10, 12, 15]
+        answer: 10
+
+      - question: Как звали юношу, который сразился с Голиафом?
+        answer: Давид
+
+  - name: Новый Завет
+    questions:
+      - question: В каком городе родился Иисус Христос?
+        choices: [Иерусалим, Назарет, Вифлеем, Капернаум]
+        answer: Вифлеем
+
+      - question: Кто предал Иисуса?
+        answer: Иуда Искариот
+
+      - question: Сколько апостолов было у Иисуса?
+        choices: [10, 12, 13, 14]
+        answer: 12
+
+      - question: Как звали апостола, который трижды отрёкся от Иисуса?
+        answer: Пётр
+
+      - question: На какой день Иисус воскрес из мёртвых?
+        answer: третий день
+        answerDetail: После распятия на третий день
+
+  - name: Женщины в Библии
+    questions:
+      - question: Кто стала женой Исаака?
+        answer: Ревекка
+
+      - question: Кто была прабабкой царя Давида, моавитянка?
+        answer: Руфь
+
+      - question: Какая женщина спасла израильских разведчиков в Иерихоне?
+        answer: Раав
+
+      - question: Кто была матерью Иисуса?
+        answer: Мария
+
+      - question: Кто первым увидел воскресшего Иисуса?
+        answer: Мария Магдалина
+
+  - name: География и цифры
+    questions:
+      - question: В какой реке крестил людей Иоанн Креститель?
+        choices: [Нил, Евфрат, Иордан, Тигр]
+        answer: Иордан
+
+      - question: Сколько книг входит в Библию?
+        choices: [66, 73, 80, 50]
+        answer: 66
+
+      - question: Как назывался сад, в котором жили Адам и Ева?
+        answer: Эдемский сад
+
+      - question: Сколько лет Моисей вёл народ по пустыне?
+        choices: [30, 40, 50, 60]
+        answer: 40
+
+      - question: Как называлось море, которое разделил Моисей?
+        answer: Красное море

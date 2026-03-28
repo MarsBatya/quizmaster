@@ -129,6 +129,7 @@ app.round-i-of-n=Ronde {0} van {1}
 app.question-i-of-n=Vraag {0} van {1}
 app.questions=vragen
 app.question=Vraag
+app.answer=Antwoord
 app.first-right-answer-gains-n-points=Eerste correcte antwoord verdient {0} punten
 app.first-right-answer-gains-1-point=Eerste correcte antwoord verdient 1 punt
 app.others-gain-1-point=andere correcte antwoorden verdienen 1 punt

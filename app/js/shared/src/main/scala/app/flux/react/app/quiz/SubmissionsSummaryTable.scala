@@ -89,7 +89,8 @@ final class SubmissionsSummaryTable(implicit
 
     private def headerRow()(implicit state: State, props: Props): VdomNode = {
       <.tr(
-        <.th(i18n("app.question")), {
+        <.th(i18n("app.question")),
+        <.th(i18n("app.answer")), {
           for (team <- state.teams)
             yield <.th(
               ^.key := team.id,
@@ -109,7 +110,7 @@ final class SubmissionsSummaryTable(implicit
       <.tr(
         ^.key := s"round-$roundIndex",
         <.th(
-          ^.colSpan := 1 + state.teams.size,
+          ^.colSpan := 2 + state.teams.size,
           round.name,
           s" [${state.submissionsSummaryState.roundToTimeEstimateMap(roundIndex).toMinutes}']",
         ),
@@ -122,7 +123,8 @@ final class SubmissionsSummaryTable(implicit
     ): VdomNode = {
       <.tr(
         ^.key := s"question-$roundIndex-$questionIndex",
-        <.td(s"${question.textualQuestion} (${question.answerAsString})"), {
+        <.td(question.textualQuestion),
+        <.td(question.answerAsString), {
           for (team <- state.teams)
             yield <.td(
               ^.key := s"$roundIndex-$questionIndex-${team.id}",
@@ -142,7 +144,7 @@ final class SubmissionsSummaryTable(implicit
         <.tr(
           ^.key := "total",
           <.th(
-            ^.colSpan := 1 + state.teams.size,
+            ^.colSpan := 2 + state.teams.size,
             i18n("app.totals"),
             s" [${state.submissionsSummaryState.totalQuizTimeEstimate.toMinutes}']",
           ),
@@ -151,7 +153,7 @@ final class SubmissionsSummaryTable(implicit
           VdomArray(
             <.tr(
               ^.key := "total-from-submissions",
-              <.th(i18n("app.total-from-submissions")), {
+              <.th(i18n("app.total-from-submissions")), <.td(), {
                 for (team <- state.teams)
                   yield <.td(
                     ^.key := team.id,
@@ -164,7 +166,7 @@ final class SubmissionsSummaryTable(implicit
             ),
             <.tr(
               ^.key := "discretionary",
-              <.th(i18n("app.discretionary-points")), {
+              <.th(i18n("app.discretionary-points")), <.td(), {
                 for (team <- state.teams)
                   yield <.td(
                     ^.key := team.id,
@@ -179,7 +181,7 @@ final class SubmissionsSummaryTable(implicit
         },
         <.tr(
           ^.key := "team-score",
-          <.th(i18n("app.total-team-score")), {
+          <.th(i18n("app.total-team-score")), <.td(), {
             for (team <- state.teams)
               yield <.th(
                 ^.key := team.id,

@@ -1,0 +1,109 @@
+# This is a demo quiz config.
+# This file contains all fields that you might want to update when creating your own quiz.
+
+title: Demo quiz
+author: Jens Nyman # Change this to your name
+instructionsOnFirstSlide: Please, don't look up the answers online
+masterSecret: quiz # Remove this line to allow anyone to access the master controls
+language: en # This is the default. The other supported languages can be found in application.conf
+
+usageStatistics:
+    sendAnonymousUsageDataAtEndOfQuiz: true
+
+    # Uncomment these lines if you're fine with sending extra data to the developer of Quizmaster.
+    #includeAuthor: true
+    #includeQuizTitle: true
+
+# Optional - Define custom defaults
+defaults:
+  maxTimeSeconds: 120
+  pointsToGain: 1
+  multipleAnswers_pointsToGainPerAnswer: 1
+  multipleQuestions_pointsToGainPerQuestion: 1
+  orderItems_pointsToGainInTotal: 2
+
+rounds:
+  - name: Geography
+    image: https://freesvg.org/img/globe-310324.png # optional
+    questions:
+      # Standard textual question
+      - question: Who was the country Colombia named after?
+        answer: Christoffer Columbus
+
+      # Standard multiple-choice question
+      - question: What is the capital of Belgium?
+        choices: [Paris, London, Brussels, Berlin]
+        answer: Brussels
+        pointsToGain: 1
+        pointsToGainOnFirstAnswer: 2 # Double points for first right answer
+
+      # Multiple-choice question - only the first right answer gets points
+      - question: What is the capital of France?
+        choices: [Paris, London, Brussels, Berlin]
+        answer: Paris
+        image: https://raw.githubusercontent.com/nymanjens/quizmaster/master/conf/quiz/assets/geography/france.png
+        answerImage: geography/france-answer.png
+        # You can also use answerAudio: and answerVideo:, which are similar to audio: and video:.
+        answerDetail: |
+          Image released under Creative Commons by Destination2
+          (www.destination2.co.uk)
+        pointsToGain: 0 # This question won't give any points
+        maxTimeSeconds: 120
+
+      # Question to be answered verbally (with video) - only the first right answer gets points,
+      # players can stop the timer to attempt an answer
+      - question: What city does this video from 1935 show?
+        answer: Guatemala City
+        video: geography/about_bananas.mp4
+        onlyFirstGainsPoints: true # See who can answer this question first
+        showSingleAnswerButtonToTeams: true # Show a button to stop the timer. Answers can then be
+                                            # given verbally.
+
+      # Special question type: Put items in the correct order
+      - questionType: orderItems
+        question: Order these cities from small to large
+        questionDetail: Population according to Google on July 2020
+        masterNotes: Mention that this is not a trick question
+        image: {src: geography/globe.png, size: small} 
+        orderedItemsThatWillBePresentedInAlphabeticalOrder:
+         - {item: Riga, answerDetail: ~600k}
+         - {item: Stockholm, answerDetail: ~1M}
+         - {item: Berlin, answerDetail: ~4M}
+         - {item: London, answerDetail: ~9M}
+        pointsToGain: 3
+
+
+  - name: Music round
+    image: https://upload.wikimedia.org/wikipedia/commons/f/f6/Music_1_-_The_Noun_Project.svg # optional
+    questions:
+      # Standard textual question with audio
+      - question: After which season is this track named?
+        questionDetail: (Royalty Free Music from Bensound)
+        answer: Summer
+        answerDetail: (By Bensound)
+        # audio: https://www.bensound.com/bensound-music/bensound-summer.mp3
+
+      # Special question type: Provide multiple answers
+      - questionType: multipleAnswers
+        question: List the band members of Metallica
+        questionDetail: (in 2021)
+        answers:
+          - {answer: James Hetfield, answerDetail: Lead vocalist}
+          - Lars Ulrich
+          - Kirk Hammett
+          - Robert Trujillo
+        answersHaveToBeInSameOrder: false
+        image: https://upload.wikimedia.org/wikipedia/commons/9/9e/Metallica_-_2003.jpg
+        pointsToGainPerAnswer: 1
+
+      # Special question type: Ask multiple questions
+      - questionType: multipleQuestions
+        questionTitle: Can you recognize the song from the lyrics?
+        questionDetail: |
+          With the lights out, it's less dangerous
+          Here we are now, entertain us
+        questions:
+          - {question: "What is the song title?", answer: "Smells Like Teen Spirit", answerDetail: 1991}
+          - {question: "Which artist?", answer: Nirvana}
+          - {question: "What year was the song released?", answer: 1991, pointsToGain: 2}
+        image: https://cdn.pixabay.com/photo/2016/01/12/17/20/sheet-music-1136234_960_720.png

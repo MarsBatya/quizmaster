@@ -1,6 +1,7 @@
+
 services:
   app:
-    image: nymanjens/quizmaster:latest
+    image: quizmaster:localv2
     stdin_open: true
     tty: true
     ports: ["8080:9000"] # outer port : inner port (can't be changed)

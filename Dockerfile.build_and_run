@@ -1,5 +1,5 @@
 # STAGE 1: Build the binary
-FROM openjdk:11-jdk AS builder
+FROM eclipse-temurin:11-jdk AS builder
 
 ARG SBT_VERSION=1.6.2
 
@@ -11,20 +11,32 @@ RUN \
   dpkg -i sbt-$SBT_VERSION.deb && \
   rm sbt-$SBT_VERSION.deb && \
   apt-get update && \
-  apt-get install sbt && \
+  apt-get install -y sbt && \
   cd && \
   rm -r /working/ && \
   sbt sbtVersion
 WORKDIR /src
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && apt-get install -y nodejs unzip
+
+# Copy only dependency files first
+COPY build.sbt .
+COPY project/ project/
+
+# Resolve and cache all dependencies as a separate layer
+RUN sbt -mem 4096 update
+
+# Copy the rest of the source
 COPY . .
-RUN apt-get update && apt-get install -y nodejs npm
-RUN sbt -mem 2048 dist
+
+# This layer only reruns if source code changed, deps are already cached
+RUN sbt -mem 4096 dist
+
 RUN mkdir dist
 RUN cd dist && unzip /src/app/jvm/target/universal/*.zip
 
 
 # STAGE 2: Run the binary
-FROM openjdk:11-jre
+FROM eclipse-temurin:11-jre
 
 COPY --from=builder /src/dist/server-1.0 /app
 

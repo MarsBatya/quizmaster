@@ -1,29 +1,12 @@
-# This is a demo quiz config.
-# This file contains all fields that you might want to update when creating your own quiz.
-
-title: Demo quiz
-image: https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/OOUI_Talk_icon_-_Question_2.svg/1024px-OOUI_Talk_icon_-_Question_2.svg.png # optional
-author: Jens Nyman # Change this to your name
-instructionsOnFirstSlide: Please, don't look up the answers online
-masterSecret: quiz # Remove this line to allow anyone to access the master controls
-language: en # This is the default. The other supported languages can be found in application.conf
+title: Демонстрационная викторина
+author: Jens Nyman
+instructionsOnFirstSlide: Пожалуйста, не ищите ответы в интернете
+masterSecret: quiz
+language: ru
 
 usageStatistics:
-    # Set this to true if you're OK with sending anonymous usage statistics to the developer.
-    #
-    # The developer politely asks you to keep this so that they get a sense of how much this is
-    # used.
-    #
-    # Unless you explicitly allow it below, the data sent to the developer will never contain
-    # anything that identifies you personally. For example: It'll contain the version, the language,
-    # and the number of players.
     sendAnonymousUsageDataAtEndOfQuiz: true
 
-    # Uncomment these lines if you're fine with sending extra data to the developer of Quizmaster.
-    #includeAuthor: true
-    #includeQuizTitle: true
-
-# Optional - Define custom defaults
 defaults:
   maxTimeSeconds: 120
   pointsToGain: 1
@@ -32,87 +15,74 @@ defaults:
   orderItems_pointsToGainInTotal: 2
 
 rounds:
-  - name: Geography
-    image: https://freesvg.org/img/globe-310324.png # optional
+  - name: География
+    image: https://freesvg.org/img/globe-310324.png
     questions:
-      # Standard textual question
-      - question: Who was the country Colombia named after?
-        answer: Christoffer Columbus
+      - question: В честь кого названа страна Колумбия?
+        answer: Христофор Колумб
 
-      # Standard multiple-choice question
-      - question: What is the capital of Belgium?
-        choices: [Paris, London, Brussels, Berlin]
-        answer: Brussels
+      - question: Какова столица Бельгии?
+        choices: [Париж, Лондон, Брюссель, Берлин]
+        answer: Брюссель
         pointsToGain: 1
-        pointsToGainOnFirstAnswer: 2 # Double points for first right answer
+        pointsToGainOnFirstAnswer: 2
 
-      # Multiple-choice question - only the first right answer gets points
-      - question: What is the capital of France?
-        choices: [Paris, London, Brussels, Berlin]
-        answer: Paris
+      - question: Какова столица Франции?
+        choices: [Париж, Лондон, Брюссель, Берлин]
+        answer: Париж
         image: https://raw.githubusercontent.com/nymanjens/quizmaster/master/conf/quiz/assets/geography/france.png
         answerImage: geography/france-answer.png
-        # You can also use answerAudio: and answerVideo:, which are similar to audio: and video:.
         answerDetail: |
-          Image released under Creative Commons by Destination2
+          Изображение распространяется по лицензии Creative Commons от Destination2
           (www.destination2.co.uk)
-        pointsToGain: 0 # This question won't give any points
+        pointsToGain: 0
         maxTimeSeconds: 120
 
-      # Question to be answered verbally (with video) - only the first right answer gets points,
-      # players can stop the timer to attempt an answer
-      - question: What city does this video from 1935 show?
-        answer: Guatemala City
+      - question: Какой город показан в этом видео 1935 года?
+        answer: Гватемала-Сити
         video: geography/about_bananas.mp4
-        onlyFirstGainsPoints: true # See who can answer this question first
-        showSingleAnswerButtonToTeams: true # Show a button to stop the timer. Answers can then be
-                                            # given verbally.
+        onlyFirstGainsPoints: true
+        showSingleAnswerButtonToTeams: true
 
-      # Special question type: Put items in the correct order
       - questionType: orderItems
-        question: Order these cities from small to large
-        questionDetail: Population according to Google on July 2020
-        masterNotes: Mention that this is not a trick question
-        image: {src: geography/globe.png, size: small} 
+        question: Расположите эти города от меньшего к большему
+        questionDetail: Население по данным Google на июль 2020
+        masterNotes: Уточните, что это не вопрос с подвохом
+        image: {src: geography/globe.png, size: small}
         orderedItemsThatWillBePresentedInAlphabeticalOrder:
-         - {item: Riga, answerDetail: ~600k}
-         - {item: Stockholm, answerDetail: ~1M}
-         - {item: Berlin, answerDetail: ~4M}
-         - {item: London, answerDetail: ~9M}
+         - {item: Рига, answerDetail: ~600 тыс.}
+         - {item: Стокгольм, answerDetail: ~1 млн}
+         - {item: Берлин, answerDetail: ~4 млн}
+         - {item: Лондон, answerDetail: ~9 млн}
         pointsToGain: 3
 
 
-  - name: Music round
-    image: https://upload.wikimedia.org/wikipedia/commons/f/f6/Music_1_-_The_Noun_Project.svg # optional
+  - name: Музыкальный раунд
+    image: https://upload.wikimedia.org/wikipedia/commons/f/f6/Music_1_-_The_Noun_Project.svg
     questions:
-      # Standard textual question with audio
-      - question: After which season is this track named?
-        questionDetail: (Royalty Free Music from Bensound)
-        answer: Summer
-        answerDetail: (By Bensound)
-        audio: https://www.bensound.com/bensound-music/bensound-summer.mp3
+      - question: В честь какого времени года названа эта композиция?
+        questionDetail: (Музыка без роялти от Bensound)
+        answer: Лето
 
-      # Special question type: Provide multiple answers
       - questionType: multipleAnswers
-        question: List the band members of Metallica
-        questionDetail: (in 2021)
+        question: Назовите участников группы Metallica
+        questionDetail: (на 2021 год)
         answers:
-          - {answer: James Hetfield, answerDetail: Lead vocalist}
-          - Lars Ulrich
-          - Kirk Hammett
-          - Robert Trujillo
+          - {answer: Джеймс Хэтфилд, answerDetail: Ведущий вокалист}
+          - Ларс Ульрих
+          - Кирк Хэмметт
+          - Роберт Трухильо
         answersHaveToBeInSameOrder: false
         image: https://upload.wikimedia.org/wikipedia/commons/9/9e/Metallica_-_2003.jpg
         pointsToGainPerAnswer: 1
 
-      # Special question type: Ask multiple questions
       - questionType: multipleQuestions
-        questionTitle: Can you recognize the song from the lyrics?
+        questionTitle: Сможете ли вы узнать песню по тексту?
         questionDetail: |
           With the lights out, it's less dangerous
           Here we are now, entertain us
         questions:
-          - {question: "What is the song title?", answer: "Smells Like Teen Spirit", answerDetail: 1991}
-          - {question: "Which artist?", answer: Nirvana}
-          - {question: "What year was the song released?", answer: 1991, pointsToGain: 2}
+          - {question: "Как называется песня?", answer: "Smells Like Teen Spirit", answerDetail: 1991}
+          - {question: "Какой исполнитель?", answer: Nirvana}
+          - {question: "В каком году вышла песня?", answer: 1991, pointsToGain: 2}
         image: https://cdn.pixabay.com/photo/2016/01/12/17/20/sheet-music-1136234_960_720.png
