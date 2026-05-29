@@ -1,7 +1,7 @@
 
 services:
   app:
-    image: quizmaster:localv2
+    image: quizmaster:localv3
     stdin_open: true
     tty: true
     ports: ["8080:9000"] # outer port : inner port (can't be changed)
