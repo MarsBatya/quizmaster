@@ -149,6 +149,19 @@ final class SubmissionsSummaryTable(implicit
             s" [${state.submissionsSummaryState.totalQuizTimeEstimate.toMinutes}']",
           ),
         ),
+        <.tr(
+          ^.key := "bonus-score",
+          <.th(i18n("app.first-to-answer-correct-count")), <.td(i18n("app.use-for-tiebreaker")), {
+            for (team <- state.teams)
+              yield <.td(
+                ^.key := team.id,
+                ^^.ifThen(props.selectedTeamId == Some(team.id)) {
+                  ^.className := "info"
+                },
+                hideIfZero(team.bonuscore)+"*",
+              )
+          }.toVdomArray,
+        ),
         <<.ifThen(state.teams.exists(team => team.score != state.submissionsSummaryState.totalPoints(team))) {
           VdomArray(
             <.tr(

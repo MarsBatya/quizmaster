@@ -847,6 +847,21 @@ final class ScalaJsApiServerFactory @Inject() (implicit
       val allTeams = fetchAllTeams()
       val unscoredSubmissions = quizState.submissions.filter(!_.scored)
 
+      // For each team, their "final" submission is the last one (after any answer changes).
+      // Among those, find which team was first to have a correct final answer.
+      val finalSubmissionByTeam: Map[Long, Submission] =
+        unscoredSubmissions
+          .groupBy(_.teamId)
+          .collect { case (teamId, subs) if subs.lastOption.isDefined => teamId -> subs.last }
+
+      val firstCorrectTeamId: Option[Long] =
+        unscoredSubmissions  // preserves original order = submission time order
+          .filter(s => finalSubmissionByTeam.get(s.teamId).contains(s) && s.isCorrectAnswer.contains(true))
+          .headOption
+          .map(_.teamId)
+
+      val firstCorrectBonus = FixedPointNumber(1)
+
       entityAccess.persistEntityModifications {
         for {
           (teamId, submissionsByTeam) <- unscoredSubmissions.groupBy(_.teamId).toVector
@@ -854,8 +869,10 @@ final class ScalaJsApiServerFactory @Inject() (implicit
           if lastSubmission.points != 0
         } yield {
           val team = allTeams.find(_.id == teamId).get
+          val bonus = if (firstCorrectTeamId.contains(teamId)) firstCorrectBonus else FixedPointNumber(0)
           val newScore = team.score + lastSubmission.points
-          EntityModification.createUpdateAllFields(team.copy(score = newScore))
+          println(s"  team=${team.name} old_score=${team.score} points=${lastSubmission.points} new_bonus=${team.bonuscore + bonus}")
+          EntityModification.createUpdateAllFields(team.copy(score = newScore, bonuscore=team.bonuscore + bonus))
         }
       }
 

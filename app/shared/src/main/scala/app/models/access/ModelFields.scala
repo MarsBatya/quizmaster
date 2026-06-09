@@ -35,6 +35,7 @@ object ModelFields {
     case object id extends IdModelField[E]
     case object name extends ModelField[String, E]("name", _.name, v => _.copy(name = v))
     case object score extends ModelField[FixedPointNumber, E]("score", _.score, v => _.copy(score = v))
+    case object bonuscore extends ModelField[FixedPointNumber, E]("bonuscore", _.bonuscore, v => _.copy(bonuscore = v))
     case object index extends ModelField[Int, E]("index", _.index, v => _.copy(index = v))
   }
 
@@ -95,6 +96,7 @@ object ModelFields {
         Team.id,
         Team.name,
         Team.score,
+        Team.bonuscore,
         Team.index,
         QuizState.id,
         QuizState.roundIndex,

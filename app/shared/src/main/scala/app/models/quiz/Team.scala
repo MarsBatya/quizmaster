@@ -11,6 +11,7 @@ case class Team(
     score: FixedPointNumber,
     /** Index in teams list. */
     index: Int,
+    bonuscore: FixedPointNumber = FixedPointNumber(0),
     override val idOption: Option[Long] = None,
     override val lastUpdateTime: LastUpdateTime = LastUpdateTime.neverUpdated,
 ) extends UpdatableEntity {

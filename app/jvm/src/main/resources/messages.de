@@ -61,6 +61,8 @@ app.incorrect=Falsch
 app.summary-of-all-scores=Zusammenfassung aller Ergebnisse
 app.totals=Summe
 app.total-from-submissions=Summe aller Antworten
+app.first-to-answer-correct-count=Versuche bis zur ersten richtigen Antwort
+app.use-for-tiebreaker=(Bei Unentschieden verwenden)
 app.discretionary-points=Zusätzliche Punkte vom Quizmaster
 app.total-team-score=Gesamtpunktzahl
 
